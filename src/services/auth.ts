@@ -22,7 +22,8 @@ export const initializeLogin = async (data: EmailData) => {
        return response.data;
     } catch (error) {
         if (axios.isAxiosError(error)) {
-            return error.response?.data;
+            if (error.response?.status === 400)
+                return error.response?.data;
         } 
 
         return { isValid: false, isError: true, message: 'An unexpected error occurred!' };

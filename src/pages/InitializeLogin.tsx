@@ -21,7 +21,6 @@ const InitializeLogin: React.FC = () => {
 
     const onSubmit = async (data: EmailData) => {
         const response = await initializeLogin(data);
-        console.log(response)
         if (response.isError) {
             toast.error(response.message);
             setError('email', { type: 'custom', message: response.message });

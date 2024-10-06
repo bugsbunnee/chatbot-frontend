@@ -8,7 +8,7 @@ const useChatStream = (refetchStream: boolean) => {
     const query = useQuery({
         queryKey: ['chat', refetchStream],
         queryFn: () => getChatMessages(),
-        initialData: { status: 'completed', list: [], lastChat: null }
+        initialData: { status: 'completed', list: [], lastChat: null },
     });
 
     useEffect(() => {

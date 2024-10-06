@@ -16,7 +16,7 @@ interface Props {
 }
 
 const MessageInput: React.FC<Props> = ({ isLoading, onSubmitMessage }) => {
-    const { formState, register, handleSubmit, reset } = useForm<MessageData>({ resolver: zodResolver(messageSchema), mode: 'onSubmit' })
+    const { formState, register, handleSubmit, reset } = useForm<MessageData>({ resolver: zodResolver(messageSchema), mode: 'all' });
 
     const onSendMesssage = useCallback((data: MessageData) => {
         onSubmitMessage({ message: data.message });

@@ -14,7 +14,7 @@ const BotTyping: React.FC<Props> = ({ isVisible }) => {
 
     return ( 
         <SlideFade in>
-            <Flex className='max-w-xl my-10' flexDirection='row' alignItems='start' gap={5}>
+            <Flex className='max-w-xl my-10 animation-pulse' flexDirection='row' alignItems='start' gap={5}>
                 <Box className='w-12 h-12 rounded-full bg-white flex justify-center items-center'>
                     <Image src={logo} alt='RusselSmith' className='w-9 h-9 object-contain'/>
                 </Box>

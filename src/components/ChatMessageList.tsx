@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsInfoCircle } from 'react-icons/bs';
 import { Box, Button, SimpleGrid, Text } from '@chakra-ui/react';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import ScrollToBottom from 'react-scroll-to-bottom';
 import useChatStream from '@/hooks/useChatStream';
@@ -18,7 +18,15 @@ import ScrollButton from './ScrollButton';
 import UserMessage from './UserMessage';
 
 const ChatMessageList: React.FC = () => {
-    const { error, mutate, isPending, isSuccess } = useMutation({ mutationFn: sendChatMessage });
+    const queryClient = useQueryClient();
+
+    const { error, mutate, isPending, isSuccess } = useMutation({ 
+        mutationFn: sendChatMessage,
+        onSuccess: (data, variables) => {
+            console.log(data, variables, queryClient.getQueryData(['chat', true]));
+            // queryClient.setQueryData(['chat', true])
+        }
+    });
     const { data, isFetching, error: fetchError } = useChatStream(isSuccess);
 
     const errorMessage = error ? error.message : fetchError ? fetchError.message : '';

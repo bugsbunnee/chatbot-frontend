@@ -11,7 +11,7 @@ const ScrollButton: React.FC = () => {
     if (sticky[0]) return null;
 
     return ( 
-        <Box className='absolute right-3 bottom-0 z-50'>
+        <Box className='absolute right-3 bottom-0 z-50 animate-bounce'>
             <IconButton
                 aria-label='Scroll to bottom'
                 icon={<BsArrowDown color='black' />}

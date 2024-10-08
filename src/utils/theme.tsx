@@ -30,8 +30,8 @@ const theme = extendTheme({
 		},
 	},
 	fonts: {
-		heading: `'Space Grotesk', sans-serif`,
-		body: `'Space Grotesk', sans-serif`,
+		heading: `"Afacad Flux", sans-serif;`,
+		body: `"Afacad Flux", sans-serif;`,
 	},
 });
 

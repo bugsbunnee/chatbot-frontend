@@ -14,3 +14,10 @@ html {
   font-family: var(--default-font-family);
   font-style: var(--default-font-style);
 }
+
+.navbar {
+  background-image: url('./assets/bg.jpeg');
+  /* background-color: #235681;
+  background-image: url('./assets/bg.jpeg');  */
+}
+

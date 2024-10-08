@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Box, Flex, HStack, Image, Skeleton, SlideFade } from '@chakra-ui/react';
-import { BiDotsHorizontal } from 'react-icons/bi';
 
 import logo from '@/assets/logo.png';
 import { AnimatePresence } from 'framer-motion';

@@ -19,7 +19,7 @@ const BotMessage: React.FC<Props> = ({ message }) => {
                     <Image src={robot} alt='RusselSmith' className='w-9 h-9 object-contain'/>
                 </Box>
                 <Box className='flex-1'>
-                    <Box className="bg-[#99c0e1] rounded-lg p-3 text-sm text-gray-900">
+                    <Box className="bg-[#eaf5ff] rounded-lg p-3 text-sm text-gray-900">
                         <MarkDown>
                             {message.content[0].text.value}
                         </MarkDown>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsInfoCircle } from 'react-icons/bs';
-import { Box, Button, SimpleGrid, Text } from '@chakra-ui/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { Box, Button, Flex, Heading, Image, SimpleGrid, Text } from '@chakra-ui/react';
+import { useMutation } from '@tanstack/react-query';
 
 import ScrollToBottom from 'react-scroll-to-bottom';
 import useChatStream from '@/hooks/useChatStream';
@@ -17,17 +17,15 @@ import MessageInput from './MessageInput';
 import ScrollButton from './ScrollButton';
 import UserMessage from './UserMessage';
 
+import robot from '@/assets/dan-robot.png';
+
 const ChatMessageList: React.FC = () => {
-    const queryClient = useQueryClient();
 
     const { error, mutate, isPending, isSuccess } = useMutation({ 
         mutationFn: sendChatMessage,
-        onSuccess: (data, variables) => {
-            console.log(data, variables, queryClient.getQueryData(['chat', true]));
-            // queryClient.setQueryData(['chat', true])
-        }
     });
-    const { data, isFetching, error: fetchError } = useChatStream(isSuccess);
+
+    const { data, isFetching, error: fetchError, onAddNewUserMessage } = useChatStream(isSuccess);
 
     const errorMessage = error ? error.message : fetchError ? fetchError.message : '';
 
@@ -35,13 +33,19 @@ const ChatMessageList: React.FC = () => {
         <Box className='flex flex-col h-full'>
             <Box className="flex-1">           
                 <ScrollToBottom className='h-[40rem] w-full'>
-                    <Box className="my-5 bg-white border border-gray-200 rounded-lg p-4 text-gray-600 flex flex-row items-center gap-4 ">
-                        <Text className='text-sm text-left flex-1'>We are here to assist you. You can also send us an email - info@russelsmithgroup.com</Text>
+                    <Flex className="my-5 bg-white border border-gray-200 rounded-lg p-4 text-gray-600" gap={4} alignItems='start' mx={10}>
+                        <Box className='w-12 h-12 rounded-full bg-white flex justify-center items-center'>
+                            <Image src={robot} alt='RusselSmith' className='w-9 h-9 object-contain'/>
+                        </Box>
+                        <Box className='flex-1'>
+                            <Heading size='md'>Hi, I'm Dan, RusselSmith's "go-to guy"</Heading>
+                            <Text className='text-sm text-left flex-1 mt-1'>I'm here to assist you with any questions that you may have about RusselSmith's services, policies and activities.</Text>
+                        </Box>
                         <BsInfoCircle />
-                    </Box>
+                    </Flex>
 
                     <Conditional isVisible={data.list.length === 0 && !isPending && !isFetching}>
-                        <SimpleGrid columns={6} gap={4} my={10}>
+                        <SimpleGrid columns={6} gap={4} m={10}>
                             {ENQUIRY_TAGS.map((tag) => (
                                 <Button 
                                     key={tag.label} 
@@ -75,7 +79,13 @@ const ChatMessageList: React.FC = () => {
                 </ScrollToBottom>
             </Box>
             <Box>
-                <MessageInput isLoading={isPending || isFetching} onSubmitMessage={(message) => mutate(message)} />
+                <MessageInput 
+                    isLoading={isPending || isFetching} 
+                    onSubmitMessage={(message) => {
+                        onAddNewUserMessage(message.message);
+                        mutate(message);
+                    }} 
+                />
             </Box>
         </Box>
     );

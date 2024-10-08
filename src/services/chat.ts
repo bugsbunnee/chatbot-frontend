@@ -27,7 +27,7 @@ export const sendChatMessage = (data: { message: string;  }) => {
 };
 
 export const getChatMessages = () => {
-    return http.get<ChatStreamResponse>('/chat').then((response) => response.data);
+    return http.get<ChatStreamResponse>('/chat');
 };
 
 export const saveFeedback = (feedback: { subject: string; message: string; }) => {

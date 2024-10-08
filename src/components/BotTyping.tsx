@@ -1,9 +1,9 @@
 import React from 'react';
 
 import { Box, Flex, HStack, Image, Skeleton, SlideFade } from '@chakra-ui/react';
+import { AnimatePresence } from 'framer-motion';
 
 import logo from '@/assets/logo.png';
-import { AnimatePresence } from 'framer-motion';
 
 interface Props {
     isVisible: boolean;

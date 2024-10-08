@@ -35,7 +35,7 @@ const ChatMessageList: React.FC = () => {
                 <ScrollToBottom className='h-[40rem] w-full'>
                     <Flex className="my-5 bg-white border border-gray-200 rounded-lg p-4 text-gray-600" gap={4} alignItems='start' mx={10}>
                         <Box className='w-12 h-12 rounded-full bg-white flex justify-center items-center'>
-                            <Image src={robot} alt='RusselSmith' className='w-9 h-9 object-contain'/>
+                            <Image src={robot} alt='RusselSmith' className='w-16 h-16 object-contain'/>
                         </Box>
                         <Box className='flex-1'>
                             <Heading size='md'>Hi, I'm Dan, RusselSmith's "go-to guy"</Heading>

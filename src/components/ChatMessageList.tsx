@@ -38,8 +38,8 @@ const ChatMessageList: React.FC = () => {
                             <Image src={robot} alt='RusselSmith' className='w-16 h-16 object-contain'/>
                         </Box>
                         <Box className='flex-1'>
-                            <Heading size='md'>Hi, I'm Dan, RusselSmith's "go-to guy"</Heading>
-                            <Text className='text-sm text-left flex-1 mt-1'>I'm here to assist you with any questions that you may have about RusselSmith's services, policies and activities.</Text>
+                            <Heading size='lg' className='text-[#235681]'>Hi, I'm Dan, RusselSmith's "go-to guy"</Heading>
+                            <Text className='text-lg text-left flex-1 max-w-3xl mt-1 leading-5'>I'm here to assist you with any questions that you may have about RusselSmith's services, policies and activities.</Text>
                         </Box>
                         <BsInfoCircle />
                     </Flex>
@@ -78,7 +78,7 @@ const ChatMessageList: React.FC = () => {
                     <ScrollButton />
                 </ScrollToBottom>
             </Box>
-            <Box>
+            <Box px={10}>
                 <MessageInput 
                     isLoading={isPending || isFetching} 
                     onSubmitMessage={(message) => {

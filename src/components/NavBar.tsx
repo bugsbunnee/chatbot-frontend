@@ -20,9 +20,7 @@ const NavBar: React.FC = () => {
     if (!auth.user) return <Navigate to='/' />;
 
     return ( 
-        <Box className="w-full flex flex-col h-dvh bg-[#235681] z-20 relative">
-            <Box className="bg-[url('./assets/bg.jpeg')] absolute w-full h-full opacity-5 z-50" />
-
+        <Box className="w-full flex flex-col h-dvh bg-[#235681] bg-[url('./assets/bg.png')] z-20 relative">
             <Center className='h-32'>
                 <Image src={logo} alt='RusselSmith' className='w-20 h-20 object-contain'/>
             </Center>

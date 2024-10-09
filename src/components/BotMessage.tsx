@@ -21,7 +21,7 @@ const BotMessage: React.FC<Props> = ({ message }) => {
                 <Box className='flex-1'>
                     <Box className="bg-[#eaf5ff] rounded-lg p-3 text-sm text-gray-900">
                         <MarkDown>
-                            {message.content[0].text.value}
+                            {message.content?.[0]?.text?.value}
                         </MarkDown>
                     </Box>
                     <Box className="text-xs text-gray-600 mt-4 text-left">DAN - {getRelativeTimeFromTimestamp(message.created_at)}</Box>

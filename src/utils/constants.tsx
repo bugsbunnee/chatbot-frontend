@@ -31,9 +31,9 @@ export const ENQUIRY_TAGS = [
 
 export const QUICK_ACTIONS = [
     {
-        label: 'Grammer Check',
+        label: 'Grammar Check',
         Icon: <BsSpellcheck />,
-        prompt: 'I need help with a grammer check for a phrase'
+        prompt: 'I need help with a grammar check for a phrase'
     },
     {
         label: 'Explain the QHS Policy',

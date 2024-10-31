@@ -100,7 +100,7 @@ const ChatMessageList: React.FC = () => {
                                 color="whiteAlpha.900"
                                 _hover={{ background: '#235681' }}
                                 textTransform='uppercase'
-                                isDisabled={isLoading}
+                                isDisabled={isLoading || isPending || isFetching}
                                 onClick={() => handleAskChatbotMessage({ message: tag.prompt })}
                             >
                                 {tag.label}

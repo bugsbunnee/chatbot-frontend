@@ -1,4 +1,5 @@
 import React, { useCallback, useState } from 'react';
+import axios from 'axios';
 
 import { Box, Button, Flex, FormControl, FormErrorMessage, FormHelperText, FormLabel, Heading, Input, InputGroup, InputLeftElement, Link as ChakraLink, Stack, Text, InputRightElement, IconButton } from '@chakra-ui/react';
 import { PiEye, PiEyeClosed, PiPhone } from 'react-icons/pi';
@@ -19,19 +20,22 @@ const Register: React.FC = () => {
     const email = searchParams.get('email') || '';
 
     const { loginUser } = useAuthStore();
-    const { register, formState, handleSubmit, } = useForm<RegisterData>({
+    const { register, formState, handleSubmit, setError } = useForm<RegisterData>({
         resolver: zodResolver(registerSchema),
         mode: 'all',
         defaultValues: { email }
     });
 
     const onRegister = async (data: RegisterData) => {
-        const token = await createUser(data);
-        if (!token) return;
-
-        loginUser(token);
-
-        window.location.href = '/dashboard';
+        try {
+            const response = await createUser(data);
+            const token: string = response.headers['x-auth-token'];
+            
+            loginUser(token);
+        } catch (error) {
+            const errorMessage = axios.isAxiosError(error) ? error.response?.data.message : (error as Error).message;
+            setError('email', { type: 'custom', message: errorMessage });
+        }
     };
 
     const handlePasswordToggle = useCallback(() => {

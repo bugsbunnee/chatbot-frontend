@@ -21,7 +21,7 @@ export const authSchema = z.object({
 });
 
 export const messageSchema = z.object({
-    message: z.string().min(10, 'Your message must be at least 10 characters'),
+    message: z.string().min(2, 'Your message must be at least 2 characters'),
 });
 
 export const registerSchema = z.object({

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import toast from 'react-hot-toast';
+import axios from 'axios';
+
 import { Box, Button, Flex, FormControl, FormErrorMessage, Heading, Input, InputGroup, InputLeftElement, Link as ChakraLink, Stack, Text } from '@chakra-ui/react';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -9,7 +12,6 @@ import { BiEnvelope } from 'react-icons/bi';
 import { EmailData, emailSchema } from '../utils/schema';
 import { initializeLogin } from '../services/auth';
 
-import toast from 'react-hot-toast';
 
 const InitializeLogin: React.FC = () => {
     const navigate = useNavigate();
@@ -20,18 +22,20 @@ const InitializeLogin: React.FC = () => {
     });
 
     const onSubmit = async (data: EmailData) => {
-        const response = await initializeLogin(data);
-        if (response.isError) {
-            toast.error(response.message);
-            setError('email', { type: 'custom', message: response.message });
-            
-            return;
-        }
-
         const searchParams = createSearchParams({ email: data.email }).toString();
-        if (response.isValid) return navigate({ pathname: '/register', search: searchParams });
 
-        return navigate({ pathname: '/login', search: searchParams });
+        try {
+            await initializeLogin(data);
+            navigate({ pathname: '/register', search: searchParams });
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                if (error.response!.data.isExisting) return navigate({ pathname: '/login', search: searchParams });
+                
+                return setError('email', { type: 'custom', message: error.response!.data.message });
+            }
+
+            toast.error((error as Error).message);
+        }
     };
 
     return ( 

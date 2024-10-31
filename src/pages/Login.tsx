@@ -11,6 +11,7 @@ import { AuthData, authSchema } from '../utils/schema';
 import { login } from '../services/auth';
 
 import useAuthStore from '../store/auth';
+import axios from 'axios';
 
 const Login: React.FC = () => {
     const [isPasswordVisible, setPasswordVisible] = useState(false);
@@ -19,7 +20,7 @@ const Login: React.FC = () => {
     const email = searchParams.get('email') || '';
 
     const { loginUser } = useAuthStore();
-    const { register, formState, handleSubmit } = useForm<AuthData>({
+    const { register, formState, handleSubmit, setError } = useForm<AuthData>({
         resolver: zodResolver(authSchema),
         mode: 'all',
         defaultValues: {
@@ -29,12 +30,14 @@ const Login: React.FC = () => {
     });
 
     const onLogin = async (data: AuthData) => {
-        const token = await login(data);
-        if (!token) return;
-
-        loginUser(token);
-
-        window.location.href = '/dashboard';
+        try {
+            const response = await login(data);
+            loginUser(response.data.token);
+            window.location.href = '/dashboard';
+        } catch (error) {
+            const errorMessage = axios.isAxiosError(error) ? error.response?.data.message : (error as Error).message;
+            setError('email', { type: 'custom', message: errorMessage });
+        }
     };
 
     const handlePasswordToggle = useCallback(() => {

@@ -49,7 +49,7 @@ const MessageInput: React.FC<Props> = ({ isLoading, onSubmitMessage }) => {
                     {...register('message')}
                 />
                 <InputRightElement w='4rem'>
-                    <Button bg='blackAlpha.900' rounded={500} isDisabled={!formState.isValid || isLoading} size='sm' type='submit' isLoading={formState.isSubmitting || isLoading}>
+                    <Button bg='blackAlpha.900' color='whiteAlpha.900' rounded={500} isDisabled={!formState.isValid || isLoading} size='sm' type='submit' isLoading={formState.isSubmitting || isLoading}>
                         <PiArrowUp color='white' />
                     </Button>
                 </InputRightElement>
